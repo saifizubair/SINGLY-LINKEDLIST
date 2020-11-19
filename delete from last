@@ -1,0 +1,81 @@
+package com.company;
+
+
+import java.lang.*;
+import java.lang.reflect.Method;
+import java.util.*;
+import java.io.*;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+        abc obj =new abc();
+        obj.insert(12);
+        obj.insert(13);
+        obj.insert(14);
+        obj.insert(15);
+        obj.insert(16);
+        System.out.println("original list ");
+        obj.display();
+        obj.deletelast();
+        System.out.println("updated liist");
+        obj.display();
+    }
+}
+class node {
+    int data;
+    node next;
+
+    public node(int data) {
+        this.data = data;
+        this.next=null;
+    }
+}
+class abc {
+    public node head =null;
+    public  node tail = null;
+    public void insert(int data ){
+        node newnode =new node(data);
+        if(head==null){
+            head = newnode ;
+            tail=newnode ;
+        }
+        else {
+
+            tail.next=newnode;
+            tail=newnode ;
+
+        }
+    }
+    public void deletelast(){
+        if (head==null){
+            System.out.println("list is empty");
+            return;
+        }
+        else{
+            if(head!=tail){
+                node current =head;
+                while(current.next!=tail){
+                    current=current.next;
+                }
+                tail=current;
+                tail.next=null;
+            }
+            else{
+                head=tail=null;
+            }
+        }
+    }
+    public void display(){
+        node current =head;
+        if(head==null){
+            System.out.println("list is empty");
+        }
+        while(current!=null){
+            System.out.print(current.data+" ");
+            current=current.next;
+        }
+        System.out.println();
+    }
+}
