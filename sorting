@@ -1,0 +1,84 @@
+package com.company;
+
+import java.io.*;
+import java.lang.*;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+     public static void main(String[] args) {
+          abc obj =new abc();
+          obj.insert(13);
+          obj.insert(32);
+          obj.insert(21);
+          obj.insert(23);
+          obj.insert(18);
+          System.out.println("original linkedlist");
+          obj.display();
+          System.out.println("sorted linkedlist");
+          obj.sort();
+          obj.display();
+
+    }
+}
+
+class node  {
+    int data ;
+    node next ;
+
+    public node(int data) {
+        this.data = data;
+        this.next=null;
+    }
+}
+class abc {
+    public node head = null;
+    public node tail = null;
+
+    public void insert(int data) {
+        node newnode = new node(data);
+        if (head == null) {
+            head = newnode;
+            tail = newnode;
+        } else {
+            tail.next = newnode;
+            tail = newnode;
+        }
+    }
+
+    public void sort() {
+            node current =head,index=null;
+            int temp;
+            if(head==null){
+                System.out.println("list is empty");
+                return;
+            }
+            else{
+                while (current!=null){
+                    index=current.next;
+                    while (index!=null){
+                        if(current.data> index.data){
+                            temp= current.data;
+                            current.data= index.data;
+                            index.data=temp;
+                        }
+                        index=index.next;
+                    }
+                    current=current.next;
+                }
+            }
+    }
+    public void display(){
+        node current =head;
+        if(head==null){
+            System.out.println("list os empty");
+        }
+        else{
+            while(current!=null){
+                System.out.print(current.data+" ");
+                current=current.next;
+            }
+        }
+    }
+}
