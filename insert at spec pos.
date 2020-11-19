@@ -1,0 +1,74 @@
+package com.company;
+
+import java.io.*;
+import java.sql.*;
+import java.lang.*;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main  {
+
+    public static void main(String [] args){
+      abc obj =new abc();
+      obj.insert(12);
+      obj.insert(13);
+      obj.insert(14);
+      obj.insert(15);
+      obj.display();
+      obj.insrtatspec(17);
+      obj.display();
+    }
+}
+class node {
+    int data ;
+    node next;
+
+    public node(int data) {
+        this.data = data;
+        this.next=null;
+    }
+}
+class abc {
+    public node head=null;
+    public node tail=null;
+    public void insert (int data){
+        node newnode =new node(data);
+        if(head==null){
+            head=newnode;
+            tail=newnode;
+        }
+        else{
+            tail.next=newnode;
+            tail=newnode;
+        }
+    }
+    public void insrtatspec(int data){
+        node ptr2 = new node(data);
+        node ptr =head;
+        System.out.println("enter the positon");
+        Scanner sc =new Scanner(System.in);
+        int loc =sc.nextInt();
+        for (int i=1;i<loc;i++){
+            ptr=ptr.next;
+            if(ptr==null){
+                System.out.println("node cannot inserted");
+            }
+        }
+        ptr2.next =ptr.next;
+        ptr.next=ptr2;
+        System.out.println("node is inserted ");
+
+    }
+    public void display(){
+        node current =head;
+        if(head==null){
+            System.out.println("list is empty");
+        }
+        else{
+            while (current!=null){
+                System.out.print(current.data+" ");
+                current=current.next;
+            }
+        }
+    }
+}
