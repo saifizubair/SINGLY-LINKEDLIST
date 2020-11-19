@@ -1,0 +1,69 @@
+package com.company;
+
+import java.io.*;
+import java.lang.*;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+       abc obj =new abc();
+       obj.insert(12);
+        obj.insert(13);
+        obj.insert(14);
+        obj.insert(15);
+        obj.insert(16);
+        obj.insert(17);
+        obj.display();
+        obj.middle();
+
+    }
+}
+class node {
+    int data ;
+    node next;
+
+    public node(int data) {
+        this.data = data;
+        this.next=null;
+    }
+}
+class abc {
+    public node head=null;
+    public node tail=null;
+    public void insert(int data){
+        node newnode=new node(data);
+        if(head==null){
+            head=newnode;
+            tail=newnode;
+        }
+        else{
+            tail.next=newnode;
+            tail=newnode;
+        }
+    }
+    public void  middle (){
+        node p =head;
+        node q=head;
+        while (q!=null && q.next!=null){
+
+            p=p.next;
+            q=q.next.next;
+        }
+        System.out.println(p.data);
+    }
+    public void display(){
+        node current =head;
+        if(head==null){
+            System.out.println("list is empty");
+        }
+        else{
+            while (current!=null){
+                System.out.print(current.data+" ");
+                current=current.next;
+            }
+        }
+        System.out.println();
+    }
+}
