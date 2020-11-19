@@ -1,0 +1,68 @@
+package com.company;
+
+import java.lang.*;
+import java.lang.reflect.Method;
+import java.util.*;
+import java.io.*;
+
+
+public class Main  {
+    public static void main(String[] args) {
+        abc obj =new abc();
+        obj.insert(23);
+        obj.insert(24);
+        obj.insert(25);
+        obj.insert(26);
+        obj.insert(27);
+        obj.display();
+        obj.count();
+
+    }
+}
+class node
+{
+    int data ;
+    node next;
+
+    public node(int data) {
+        this.data = data;
+        this.next=null;
+    }
+}
+ class abc {
+    public node head=null;
+    public node  tail=null;
+    public void insert(int data){
+        node newnode =new node(data);
+        if(head==null){
+            head =newnode;
+            tail=newnode;
+        }
+        else{
+
+            tail.next=newnode;
+            tail=newnode;
+        }
+    }
+    public void  count (){
+        int count =0;
+        node current =head;
+        while (current!=null){
+            count++;
+            current=current.next;
+        }
+        System.out.println("length of linked list "+count);
+    }
+    public void display(){
+        node current =head;
+        if(head==null){
+            System.out.println("list is empty");
+        }
+        while(current!=null){
+            System.out.print(current.data+" ");
+            current=current.next;
+        }
+        System.out.println();
+    }
+ }
+
