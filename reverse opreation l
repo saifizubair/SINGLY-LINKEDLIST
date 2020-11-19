@@ -1,0 +1,71 @@
+package com.company;
+
+import java.lang.*;
+import java.lang.reflect.Method;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.io.*;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+        abc obj=new abc();
+        System.out.println("original linkedlist");
+        obj.insert(23);
+        obj.insert(24);
+        obj.insert(25);
+        obj.insert(26);
+        obj.insert(27);
+        obj.display();
+        obj.reverse();
+        obj.display();
+
+    }
+}
+class node {
+    int data ;
+    node next;
+
+    public node(int data) {
+        this.data = data;
+        this.next=null;
+    }
+}
+class abc {
+    public node head=null;
+    public node tail=null;
+    public void insert(int data){
+        node newnode =new node(data);
+        if(head==null){
+            head=newnode;
+            tail=newnode;
+        }
+        else{
+            tail.next=newnode;
+            tail=newnode;
+        }
+    }
+    public void reverse(){
+        node prevnode=null;
+        node currentnode=head;
+        node nextnode=head;
+        while (currentnode!=null){
+            nextnode=nextnode.next;
+            currentnode.next=prevnode;
+            prevnode=currentnode;
+            currentnode=nextnode;
+        }
+        head=prevnode;
+        System.out.println("revrese succesfully");
+
+    }
+    public void display(){
+        node currentnode=head;
+        while(currentnode!=null){
+            System.out.print(currentnode.data+" ");
+            currentnode=currentnode.next;
+        }
+        System.out.println();
+    }
+}
