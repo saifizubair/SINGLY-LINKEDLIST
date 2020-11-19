@@ -1,0 +1,88 @@
+package com.company;
+
+import java.io.*;
+import java.sql.*;
+import java.lang.*;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        abc obj =new abc();
+        obj.insert(12);
+        obj.insert(13);
+        obj.insert(14);
+        obj.insert(15);
+        obj.insert(16);
+        obj.display();
+        obj.deletespec();
+        obj.display();
+
+    }
+}
+class node {
+    int data;
+    node next ;
+
+    public node(int data) {
+        this.data = data;
+        this.next=null;
+    }
+}
+class abc {
+    public node head = null;
+    public node tail = null;
+
+    public void insert(int data) {
+        node newnode = new node(data);
+        if (head == null) {
+            head = newnode;
+            tail = newnode;
+        } else {
+            tail.next = newnode;
+            tail = newnode;
+        }
+    }
+
+    public void deletespec() {
+         node temp =head;
+         int len =0;
+        if (head==null){
+            System.out.println("list is empty");
+        }
+        else {
+              node current =head;
+              node prev =head;
+            while (temp!=null){
+                temp=temp.next;
+                len++;
+            }
+            System.out.println("enter the positon ");
+            Scanner sc =new Scanner(System.in);
+            int n =sc.nextInt();
+            int pos =len-n+1;
+            for(int i =1;i<pos;i++){
+                current =current.next;
+            }
+            for(int i =1;i<pos-1;i++){
+                prev=prev.next;
+            }
+            prev.next=current.next;
+            current.next=null;
+        }
+
+    }
+
+
+    public void display() {
+        node current = head;
+        if (head == null) {
+            System.out.println("list is empty");
+        }
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+    }
+}
