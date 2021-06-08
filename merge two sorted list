@@ -1,0 +1,77 @@
+package com.company;
+
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[]args){
+        abc list1 =new abc();
+        abc list2 =new abc();
+        list1.insert(1);
+        list1.insert(2);
+        list1.insert(3);
+        list2.insert(4);
+        list2.insert(5);
+        list2.insert(6);
+        list1.display(list1.head);
+        System.out.println(" ");
+        list1.display(list2.head);
+        System.out.println();
+        node merglist = list1.mergesort(list1.head, list2.head);
+        list1.display(merglist);
+
+    }
+}
+class node {
+    int data;
+    node next;
+
+    public node(int data) {
+        this.data = data;
+        this.next =null;
+    }
+}
+class abc{
+    public node head;
+    public node tail;
+     public void insert(int data){
+         node newnode =new node(data);
+         if (head==null){
+             head=newnode;
+             tail=newnode;
+         }
+         else {
+             tail.next = newnode;
+             tail = newnode;
+         }
+     }
+     public void display(node node ){
+         if (node==null){
+             return;
+         }
+         System.out.print(node.data+" ");
+         display(node.next);
+     }
+     public node merge(node a , node b){
+         node temp = new node(head.data);
+         node finallist =temp;
+         while (a!=null&&b!=null){
+             if (a.data<b.data){
+                 temp.next=a;
+                 a=a.next;
+             }
+             else {
+                 temp.next=b;
+                 b=b.next;
+             }
+             temp=temp.next;
+         }
+         temp.next=(a==null)?b:a;
+         return finallist.next;
+     }
+     public node mergesort(node a, node b){
+         return merge(a,b);
+     }
+}
