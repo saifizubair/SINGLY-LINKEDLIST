@@ -1,0 +1,67 @@
+package com.company;
+
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[]args){
+        abc list =new abc();
+        list.insert(1);
+        list.insert(2);
+        list.insert(3);
+        boolean res = list.hascycle(list.head);
+        if (res==true){
+            System.out.print("true");
+        }
+        else System.out.print("false");
+    }
+}
+class node {
+    int data;
+    node next;
+
+    public node(int data) {
+        this.data = data;
+        this.next =null;
+    }
+}
+class abc{
+    public node head;
+    public node tail;
+     public void insert(int data){
+         node newnode =new node(data);
+         if (head==null){
+             head=newnode;
+             tail=newnode;
+         }
+         else {
+             tail.next = newnode;
+             tail = newnode;
+             tail.next=head;
+         }
+     }
+     public void display(node node ){
+         if (node==null){
+             return;
+         }
+         System.out.print(node.data+" ");
+         display(node.next);
+     }
+    public boolean hascycle (node head){
+         if (head==null){
+             return false;
+         }
+         node slow =head;
+         node fast =head.next;
+         while (slow!=fast){
+             if (fast==null||fast.next==null){
+                 return false;
+             }
+             slow=slow.next;
+             fast=fast.next.next;
+         }
+         return true;
+    }
+}
