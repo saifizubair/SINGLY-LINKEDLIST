@@ -1,99 +1,104 @@
 package com.company;
 
 import java.io.*;
-
 import java.lang.*;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
+
 
 public class Main {
-    static class node{
-        int data ;
-        node next;
-        node(int d){
-            data=d;
+    public static void main(String[] args) {
+        abc list1= new abc();
+        list1.insert(2);
+        list1.insert(3);
+        list1.insert(4);
+        list1.insert(5);
+        list1.display(list1.head);
+        System.out.println();
+        abc list2=new abc();
+        list2.insert(2);
+        list2.insert(3);
+        list2.insert(5);
+        list2.insert(8);
+        list2.display(list2.head);
+        System.out.println();
+        node addlist = list1.addition(list1.head, list2.head);
+        list1.display(addlist);
+    }
+}
+class node {
+    int data;
+    node next;
+
+    public node(int data) {
+        this.data = data;
+        this.next=null;
+    }
+}
+class abc{
+    public node head;
+    public node tail;
+    public void insert(int data){
+        node newnode =new node(data);
+        if (head==null){
+            head=newnode;
+            tail=newnode;
+        }
+        else {
+            tail.next=newnode;
+            tail=newnode;
         }
     }
-    node head1, head2;
-    public static node reverse(node node ){
-
-            node prev =null;
-            node current =node;
-            node next =null;
-            while (current!=null){
-                next =current.next;
-                current.next=prev;
-                prev=current;
-                current=next;
-            }
-            node=prev;
-            return node;
-
-
+    public void display(node node ){
+       if (node==null){
+           return;
+       }
+       System.out.print(node.data+" ");
+       display(node.next);
     }
-    node   addition(node first , node second ){
-        node res=null;
-        node prev=null;
-        node temp=null;
-        int carry =0, sum;
-        while (first!=null||second!=null){
-
-            sum =carry+(first!=null? first.data : 0)+(second!=null? second.data : 0);
-            carry=sum/10;
-            sum=sum%10;
-            temp=new node(sum);
-            if(res==null){
-                res=temp;
+    public node  reverse(node node ){
+        node prev =null;
+        node current =node;
+        node next =null;
+        while (current!=null){
+            next =current.next;
+            current.next=prev;
+            prev=current;
+            current=next;
+        }
+        node=prev;
+        return node;
+    }
+  public node addition(node node1 ,node node2){
+        node1 =this.reverse(node1);
+        node2 =this.reverse(node2);
+        node newlist =null;
+        node prev =null;
+        int c=0; int sum;
+        while (node1!=null||node2!=null){
+            sum =c+(node1!=null? node1.data : 0)+(node2!=null?node2.data:0);
+            c=sum/10;
+            node node =new node(sum%10);
+            if (newlist==null){
+                newlist=node;
             }
             else {
-                prev.next=temp;
+                prev.next=node;
             }
-            prev=temp;
-            if(first!=null){
-                first=first.next;
+            prev=node;
+            if(node1!=null){
+                node1=node1.next;
             }
-            if(second!=null){
-                second=second.next;
+            if (node2!=null){
+                node2=node2.next;
             }
-
         }
-        if(carry>0) {
-            temp.next= new node(carry);
+        if (c!=0){
+            prev.next =new node(c);
         }
-        return res;
-    }
-    void display(node head){
-        while (head!=null){
-            System.out.print(head.data+" ");
-            head=head.next;
-        }
-        System.out.println(" ");
-    }
-
-  public static void main(String[]args){
-
-      Main list =new Main();
-      list.head1=new node(1);
-      list.head1.next=new node(4);
-      list.head1.next.next=new node(6);
-      list.head1.next.next.next=new node(2);
-      list.head2=new node(5);
-      list.head2.next=new node(2);
-      list.head2.next.next=new node(6);
-      list.head2.next.next.next=new node(7);
-      System.out.println("list 1 :");
-      list.display(list.head1);
-      System.out.println("list 2:");
-      list.display(list.head2);
-       list.head1 =reverse(list.head1);
-       list.head2=reverse(list.head2);
-       System.out.println("after addition :");
-      node result= list.addition(list.head1, list.head2);
-       result=reverse(result);
-       list.display(result);
+        newlist =this.reverse(newlist);
+        return newlist;
   }
 }
-
 
 
 
